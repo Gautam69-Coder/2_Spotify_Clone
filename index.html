@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="navsize">
+        <div class="header">
+            <div><img class="logo" src="logo.svg" alt=""></div>
+            <nav class="navbar1">
+                <div class="fullscreen-toggle mobile-only">
+                    <img src="fullscreen.svg" alt="Fullscreen" id="fullscreen-btn" class="icon-size">
+                </div>
+                <div class="home-circle">
+                    <div class="home home2">
+                        <img src="home.svg" alt="home-icon" class="home-icon home-svg home-circle2">
+                    </div>
+                    <div class="input home-circle">
+                        <img src="search.svg" alt="" class="search-icon icon-size">
+                        <input type="text" placeholder="Search" class="search">
+                    </div>
+                </div>
+            </nav>
+            <nav class="navbar2">
+                <div class="group circle notification-svg">
+                    <img src="notification.svg" alt="group" class="icon-size ">
+                </div>
+                <div class="group circle group-svg">
+                    <img src="group.svg" alt="group" class="icon-size ">
+                </div>
+                <button class="btn-ls circle ">Login</button>
+                <button class="btn-ls circle ">Sign Up</button>
+            </nav>
+        </div>
+    </div>
+
+    <div class="main flex">
+        <div class="left">
+            <div class="library">
+                <div class="text bgc">Your Library
+                    <button class="create btn-c"><img src="lus.svg" alt="">Create</button>
+                    <div class="clo">
+                        <img src="cross.svg" alt="" class="cross-svg">
+                    </div>
+
+                </div>
+                <div class="ap bgc">
+                    <div class=" btn-c bgc">Playlist</div>
+                    <div class=" btn-c bgc">Artists</div>
+                </div>
+                <div class="songlist">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="navbar3 bgc">
+                <li class="bgc  nav3-select">
+                    <img class="humburger" src="humburger.svg" alt="">
+                    <ul class="bgc btn-c">All</ul>
+                    <ul class="bgc btn-c">Music</ul>
+                    <ul class="bgc btn-c">Podcasts</ul>
+                </li>
+                <div class="user-box bgc">
+                    <div class="made bgc">Made for <span class="bgc user-name"></span></div>
+                </div>
+            </div>
+            <div class="main-section">
+                <div class="music-box-hover bgc">
+                    <div class="music-main">
+                        <div class="music-img">
+                                alt="music" class="music-box">
+                            <div class="music-name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="music-box-hover bgc">
+                    <div class="music-main">
+                        <div class="music-img">
+                            <img src="https://newjams-images.scdn.co/image/ab676477000033ad/dt/v3/discover-weekly/aAbca4VNfzWuUCQ_FGiEFA==/bmVuZW5lbmVuZW5lbmVuZQ=="
+                                alt="music" class="music-box">
+                            <div class="music-name">Your weekly Music</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="music-box-hover bgc">
+                    <div class="music-main">
+                        <div class="music-img">
+                            <img src="https://newjams-images.scdn.co/image/ab676477000033ad/dt/v3/discover-weekly/aAbca4VNfzWuUCQ_FGiEFA==/bmVuZW5lbmVuZW5lbmVuZQ=="
+                                alt="music" class="music-box">
+                            <div class="music-name">Your weekly Music</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="player">
+                <div class="adjust">
+                    <span class="songname"></span>
+                    <span class="songbuttons">
+                        <span class="music-button"><button class="btn-ppn btn-previous"><img id="previous"
+                                    src="previous.svg" alt=""></button></span>
+                        <span class="music-button"><button class="btn-ppn btn-play"><img id="play" src="play.svg"
+                                    alt=""></button></span>
+                        <span class="music-button"><button class="btn-ppn btn-next"><img id="next" src="next.svg"
+                                    alt=""></button></span>
+                    </span>
+                    <span class="songduration"></span>
+                </div>
+                <div class="seekbar">
+                    <div class="scircle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
