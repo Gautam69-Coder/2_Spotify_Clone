@@ -1,35 +1,34 @@
 let currentsong = new Audio();
-let songs
+let songs;
 
 function secondsToMinutesSeconds(seconds) {
-    if (isNaN(seconds) || seconds < 0) {
-        return "00:00";
-    }
-
+    if (isNaN(seconds) || seconds < 0) return "00:00";
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
-
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
 }
 
 async function getsongs() {
-    let a = await fetch("http://127.0.0.1:3002/songs/");
-    let response = await a.text();
-    let div = document.createElement("div");
-    div.innerHTML = response;
-    let as = div.getElementsByTagName("a");
-    let songs = [];
-    for (let i = 0; i < as.length; i++) {
-        const element = as[i];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/")[1]);
-        }
-    }
-    return songs;
+    return [
+        "Blue Eyes copy.mp3",
+        "Blue Eyes.mp3",
+        "Brown Rang copy.mp3",
+        "Brown Rang.mp3",
+        "Dope Shope copy.mp3",
+        "Dope Shope.mp3",
+        "HIGH HEELS copy.mp3",
+        "HIGH HEELS.mp3",
+        "Jab Se Tere Naina copy.mp3",
+        "Jab Se Tere Naina.mp3",
+        "One Bottle Down copy.mp3",
+        "One Bottle Down.mp3",
+        "Suno Na Suno Na copy.mp3",
+        "Suno Na Suno Na.mp3"
+    ];
 }
 
 const PlayMusic = (track, pause = false) => {
-    currentsong.src = "/songs/" + track;
+    currentsong.src = "songs/" + track;
     if (!pause) {
         currentsong.play();
         play.src = "pause.svg";
@@ -41,9 +40,9 @@ const PlayMusic = (track, pause = false) => {
 
 async function main() {
     songs = await getsongs();
-    // console.log(songs)
+
     let songul = document.querySelector(".songlist ul");
-    PlayMusic(songs[0], true)
+    PlayMusic(songs[0], true); // Autoplay first song but paused
 
     for (const song of songs) {
         songul.innerHTML += `
@@ -59,7 +58,7 @@ async function main() {
         </li>`;
     }
 
-    Array.from(document.querySelectorAll(".songlist li")).forEach(e => {
+    document.querySelectorAll(".songlist li").forEach(e => {
         e.addEventListener("click", () => {
             let track = e.getAttribute("data-track");
             PlayMusic(track);
@@ -69,14 +68,14 @@ async function main() {
     currentsong.addEventListener("timeupdate", () => {
         document.querySelector(".songduration").innerHTML =
             `${secondsToMinutesSeconds(currentsong.currentTime)}/${secondsToMinutesSeconds(currentsong.duration)}`;
-        document.querySelector(".scircle").style.left = (currentsong.currentTime / currentsong.duration) * 100 + "%"
+        document.querySelector(".scircle").style.left = (currentsong.currentTime / currentsong.duration) * 100 + "%";
     });
 
     document.querySelector(".seekbar").addEventListener("click", e => {
         let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
         document.querySelector(".scircle").style.left = percent + "%";
-        currentsong.currentTime = ((currentsong.duration) * percent) / 100
-    })
+        currentsong.currentTime = (currentsong.duration * percent) / 100;
+    });
 
     play.addEventListener("click", () => {
         if (currentsong.paused) {
@@ -89,29 +88,26 @@ async function main() {
     });
 
     document.querySelector(".humburger").addEventListener("click", () => {
-        document.querySelector(".left").style.left = "0"
-    })
+        document.querySelector(".left").style.left = "0";
+    });
 
     document.querySelector(".cross-svg").addEventListener("click", () => {
-        document.querySelector(".left").style.left = "-100%"
-    })
+        document.querySelector(".left").style.left = "-100%";
+    });
 
     document.querySelector(".btn-previous").addEventListener("click", () => {
-        console.log("previous")
-        let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0])
+        let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
         if ((index - 1) >= 0) {
-            PlayMusic(songs[index - 1])
+            PlayMusic(songs[index - 1]);
         }
-    })
+    });
 
     document.querySelector(".btn-next").addEventListener("click", () => {
-        console.log("next")
-        console.log(currentsong.src)
-        let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0])
-        if ((index + 1) >= 0) {
-            PlayMusic(songs[index + 1])
+        let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
+        if ((index + 1) < songs.length) {
+            PlayMusic(songs[index + 1]);
         }
-    })
+    });
 
     currentsong.addEventListener("ended", () => {
         let index = songs.indexOf(currentsong.src.split("/").slice(-1)[0]);
@@ -125,17 +121,15 @@ async function main() {
 
     songs.forEach(song => {
         let songName = song.replaceAll("%20", " ").replaceAll(".mp3", "");
-
         mainSection.innerHTML += `
         <div class="music-box-hover bgc" data-track="${song}">
             <div class="music-main">
                 <div class="music-img">
-                    <img  class="song-img" src="sp.jpeg">
+                    <img class="song-img" src="sp.jpeg">
                     <div class="music-name">${songName}</div>
                 </div>
             </div>
-        </div>
-    `;
+        </div>`;
     });
 
     document.querySelectorAll(".music-box-hover").forEach(el => {
@@ -145,27 +139,14 @@ async function main() {
         });
     });
 
-    document.getElementById("fullscreen-btn").addEventListener("click", () => {
-        const elem = document.documentElement; // You can also use a specific div
+    document.getElementById("fullscreen-btn")?.addEventListener("click", () => {
+        const elem = document.documentElement;
         if (!document.fullscreenElement) {
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { // Safari
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { // IE11
-                elem.msRequestFullscreen();
-            }
+            elem.requestFullscreen?.();
         } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
+            document.exitFullscreen?.();
         }
     });
-
 }
 
 main();
