@@ -27,7 +27,8 @@ async function getsongs() {
     ];
 }
 const PlayMusic = (track, pause = false) => {
-    currentsong.src = "songs/" + track;
+    currentsong.src = "Songs/" + track;
+
     if (!pause) {
         currentsong.play();
         play.src = "pause.svg";
@@ -35,7 +36,22 @@ const PlayMusic = (track, pause = false) => {
     let songname = track.replaceAll("%20", " ").replaceAll(".mp3", " ");
     document.querySelector(".songname").innerHTML = songname;
     document.querySelector(".songduration").innerHTML = "00:00";
+
 };
+
+const k=async ()=> {
+  const res = await fetch('http://127.0.0.1:3002/Songs/');
+  const html = await res.text();
+
+  // Extract all hrefs from <a> tags
+  const hrefs = html.match(/href="(.*?)"/g).map(h => h.replace(/href="|"/g, ''));
+
+  console.log(hrefs); // Output: ['song1.mp3', 'song2.mp3', ...]
+}
+
+
+
+
 
 async function main() {
     songs = await getsongs();
