@@ -10,13 +10,10 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getsongs() {
     return [
-        "Blue Eyes copy.mp3",
+       
         "Blue Eyes.mp3",
-        "Brown Rang copy.mp3",
         "Brown Rang.mp3",
-        "Dope Shope copy.mp3",
         "Dope Shope.mp3",
-        "HIGH HEELS copy.mp3",
         "HIGH HEELS.mp3",
         "Jab Se Tere Naina copy.mp3",
         "Jab Se Tere Naina.mp3",
