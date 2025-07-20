@@ -28,7 +28,7 @@ async function getsongs() {
 }
 
 const PlayMusic = (track, pause = false) => {
-    currentsong.src = "songs/" + track;
+    currentsong.src = "Songs/" + track;
     if (!pause) {
         currentsong.play();
         play.src = "pause.svg";
